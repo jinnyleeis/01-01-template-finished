@@ -6,6 +6,8 @@ export default function () {
     alpha: true,
   });
 
+  const textureLoader = new THREE.TextureLoader();
+
   const container = document.querySelector('#container');
 
   container.appendChild(renderer.domElement);
@@ -33,7 +35,8 @@ export default function () {
     const ambientLight = new THREE.AmbientLight(0xffffff, 1);
     scene.add(ambientLight);
     //지구에 적용할 푸른색상이 머테리얼을 만든다.
-    const material = new THREE.MeshBasicMaterial({color:0x1234ff});
+    const material = new THREE.MeshBasicMaterial({map:textureLoader.load('assets/earth_nightmap.jpg')});
+    //이렇게 하면 자동으로 public 폴도 밑의 assets 폴더로 
     //지구처럼 둥근 sphere geometry 만든다. 
     const geometry = new THREE.SphereGeometry(1.3,30,30);
     const mesh = new THREE.Mesh(geometry,material);
