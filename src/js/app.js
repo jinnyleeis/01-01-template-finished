@@ -97,7 +97,7 @@ export default function () {
 
   const createParticles =() =>{
 
-    const count = 10000;
+    const count = 1000;
     const positions=new Float32Array(count*3);
     //각 정점의 x,y,z 좌표를 각각 하나의 아이템으로 만든 형태로 표현되기 때문에, 
     //정점의 개수인 count에 *3한 값을 넣어주도록 한다. 
@@ -105,17 +105,20 @@ export default function () {
     //이제 이 positions 배열 안에 정점의 위치 좌표를 담아주기 위해, 
     //정점의 개수만큼 반복문을 순회하면서 좌표를 설정해주도록 한다. 
     for(let i=0; i<count; i++){
-      positions[i*3]=100*(Math.random()-0.5); //random은 0-1사이의 값 -> -0.5~0.5
-      positions[i*3+1]=100*(Math.random()-0.5);
-      positions[i*3+2]=100*(Math.random()-0.5);
+      positions[i*3]=10*(Math.random()-0.5); //random은 0-1사이의 값 -> -0.5~0.5
+      positions[i*3+1]=10*(Math.random()-0.5);
+      positions[i*3+2]=10*(Math.random()-0.5);
     }
     //버퍼 geometry의 위치 정보에 위에서 설정한 positions 배열을 담아준다. 
     
     //버퍼 어트리뷰트 속성이란 걸 표현해줄 수 있는 걸로 threejs 내장 객체로 표현해야 
     //3은 positions 배열의 아이템 3개가 모여, 점 하나가 된다라는 의미이다. 
 
+    const textureLoader = new THREE.TextureLoader();
+    const texture = textureLoader.load('assets/particle.png'); 
     const particleMaterial=new THREE.PointsMaterial({
-      color:0xffffff,size:0.001,sizeAttenuation:false
+      map:texture,
+      color:0xffffff,size:10,sizeAttenuation:false
     })
     const particleGeometry=new THREE.BufferGeometry();
     particleGeometry.setAttribute('position',new THREE.BufferAttribute(positions,3));
