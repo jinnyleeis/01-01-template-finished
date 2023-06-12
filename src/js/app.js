@@ -84,6 +84,12 @@ export default function () {
 
   }
 
+  const createStar = (count=500) =>{
+    const particleGeometry  = new THREE.BufferGeometry();
+    particleGeometry.setAttribute
+
+  }
+
   //코드를 더 깔끔하게 관리하기 위함임!
   const create = () => {
     const earth1 = createEarth1();
