@@ -117,8 +117,8 @@ export default function () {
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load('assets/particle.png'); 
     const particleMaterial=new THREE.PointsMaterial({
-      map:texture,
-      color:0xffffff,size:10,sizeAttenuation:false
+     depthWrite:false,alphaMap:texture,transparent:true,
+      color:0xffffff,size:3,sizeAttenuation:false
     })
     const particleGeometry=new THREE.BufferGeometry();
     particleGeometry.setAttribute('position',new THREE.BufferAttribute(positions,3));
