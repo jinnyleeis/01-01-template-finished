@@ -5,6 +5,8 @@ export default function () {
   const renderer = new THREE.WebGLRenderer({
     alpha: true,
   });
+  //렌더러의 output endcoding을 three.srgbencoding 방식으로 바꾼다. 
+  renderer.outputEncoding = THREE.sRGBEncoding;
 
   const textureLoader = new THREE.TextureLoader();
 
