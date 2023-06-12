@@ -68,7 +68,7 @@ export default function () {
     //지구처럼 둥근 sphere geometry 만든다. 
     const geometry = new THREE.SphereGeometry(1.3,30,30);
     const mesh = new THREE.Mesh(geometry,material);
-    scene.add(mesh);
+    return mesh;
 
   };
 
@@ -79,10 +79,18 @@ export default function () {
     });
     const geometry=new THREE.SphereGeometry(1.5,30,30);
     const mesh = new THREE.Mesh(geometry,material);
-    scene.add(mesh);
+    return mesh;
 
 
   }
+
+  //코드를 더 깔끔하게 관리하기 위함임!
+  const create = () => {
+    const earth1 = createEarth1();
+    const earth2 = createEarth2();
+    scene.add(earth1,earth2);
+  }
+  
  
   const resize = () => {
     canvasSize.width = window.innerWidth;
@@ -109,8 +117,7 @@ export default function () {
 
   const initialize = () => {
     addLight();
-    createEarth1();
-    createEarth2();
+    create();
     addEvent();
     resize();
     draw();
