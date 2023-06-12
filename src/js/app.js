@@ -84,9 +84,19 @@ export default function () {
 
   }
 
+  const createPoints =() =>{
+
+    const pointMaterial=new THREE.PointsMaterial({
+      color:0xffffff,size:0.001,sizeAttenuation:false
+    })
+    const pointGeometry=new THREE.SphereGeometry(1.5);
+    const points=new THREE.Points(pointGeometry,pointMaterial);
+    scene.add(points);
+//sizeattuen-> 원근에 따른 점의 크기의 차이를 두지 않도록 설정 
+  }
   const createStar = (count=500) =>{
-    const particleGeometry  = new THREE.BufferGeometry();
-    particleGeometry.setAttribute
+   /// const particleGeometry  = new THREE.BufferGeometry();
+   /// particleGeometry.setAttribute
 
   }
 
@@ -124,6 +134,7 @@ export default function () {
   const initialize = () => {
     addLight();
     create();
+    createPoints();
     addEvent();
     resize();
     draw();
