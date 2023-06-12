@@ -28,14 +28,19 @@ export default function () {
   controls.enableDamping = true;
   controls.dampingFactor = 0.1;
 
-  const createObject = () => {
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    const geometry = new THREE.PlaneGeometry(1, 1);
-    const mesh = new THREE.Mesh(geometry, material);
+  const createEarth1 = () => {
 
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    scene.add(ambientLight);
+    //지구에 적용할 푸른색상이 머테리얼을 만든다.
+    const material = new THREE.MeshBasicMaterial({color:0x1234ff});
+    //지구처럼 둥근 sphere geometry 만든다. 
+    const geometry = new THREE.SphereGeometry(1.3,30,30);
+    const mesh = new THREE.Mesh(geometry,material);
     scene.add(mesh);
-  };
 
+  };
+ 
   const resize = () => {
     canvasSize.width = window.innerWidth;
     canvasSize.height = window.innerHeight;
@@ -60,7 +65,7 @@ export default function () {
   };
 
   const initialize = () => {
-    createObject();
+    createEarth1();
     addEvent();
     resize();
     draw();
