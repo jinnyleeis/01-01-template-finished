@@ -9,6 +9,15 @@ export default function () {
   renderer.outputEncoding = THREE.sRGBEncoding;
 
   const textureLoader = new THREE.TextureLoader();
+  const cubeTextureLoader = new THREE.CubeTextureLoader();
+  const environmentMap= cubeTextureLoader.load([
+    'assets/environments/px.png',
+    'assets/environments/nx.png',
+    'assets/environments/py.png',
+    'assets/environments/ny.png',
+    'assets/environments/pz.png',
+    'assets/environments/nz.png']);
+  environmentMap.encoding = THREE.sRGBEncoding;
 
   const container = document.querySelector('#container');
 
@@ -20,6 +29,8 @@ export default function () {
   };
 
   const scene = new THREE.Scene();
+  scene.background=environmentMap;
+  scene.environment=environmentMap;
   const camera = new THREE.PerspectiveCamera(
     75,
     canvasSize.width / canvasSize.height,
@@ -33,7 +44,7 @@ export default function () {
   controls.dampingFactor = 0.1;
 
   const addLight = () =>{
-    const light = new THREE.DirectionalLight(0xffffff);
+    const light = new THREE.DirectionalLight(0xffffff,1);
     light.position.set(2.65,2.13,1.02);
     scene.add(light);
   }
@@ -47,7 +58,11 @@ export default function () {
     //const directionalLight = new THREE.DirectionalLight({color:0xfffff,distance:10,intensity:10});
    // scene.add(directionalLight);
     //지구에 적용할 푸른색상이 머테리얼을 만든다.
-    const material = new THREE.MeshStandardMaterial({emissive:1,emissiveIntensity:1,transparent:0.5, map:textureLoader.load('assets/earth_nightmap.jpg')});
+    const material = new THREE.MeshStandardMaterial({
+      emissive:1,emissiveIntensity:1,transparent:0.5, 
+      map:textureLoader.load('assets/earth_nightmap.jpg'),
+      roughness : 0.8 ,metalness : 0.8 
+    });
     //이렇게 하면 자동으로 public 폴도 밑의 assets 폴더로 
     //지구처럼 둥근 sphere geometry 만든다. 
     const geometry = new THREE.SphereGeometry(1.3,30,30);
