@@ -59,7 +59,8 @@ export default function () {
    // scene.add(directionalLight);
     //지구에 적용할 푸른색상이 머테리얼을 만든다.
     const material = new THREE.MeshStandardMaterial({
-      emissive:1,emissiveIntensity:1,transparent:0.5, 
+      emissive:1,emissiveIntensity:1,transparent:true,
+      opacity:0.7,
       map:textureLoader.load('assets/earth_nightmap.jpg'),
       roughness : 0.8 ,metalness : 0.8 
     });
@@ -70,6 +71,18 @@ export default function () {
     scene.add(mesh);
 
   };
+
+  const createEarth2 = () => {
+    const material= new THREE.MeshStandardMaterial({
+      transparent:true,opacity:0.8,side:THREE.BackSide,
+      map:textureLoader.load('assets/earth_nightmap.jpg')
+    });
+    const geometry=new THREE.SphereGeometry(1.5,30,30);
+    const mesh = new THREE.Mesh(geometry,material);
+    scene.add(mesh);
+
+
+  }
  
   const resize = () => {
     canvasSize.width = window.innerWidth;
@@ -97,6 +110,7 @@ export default function () {
   const initialize = () => {
     addLight();
     createEarth1();
+    createEarth2();
     addEvent();
     resize();
     draw();
