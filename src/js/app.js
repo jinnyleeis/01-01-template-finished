@@ -30,10 +30,16 @@ export default function () {
   controls.enableDamping = true;
   controls.dampingFactor = 0.1;
 
+  const addLight = () =>{
+    const light = new THREE.DirectionalLight(0xffffff);
+    light.position.set(2.65,2.13,1.02);
+    scene.add(light);
+  }
+
   const createEarth1 = () => {
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 10);
-    scene.add(ambientLight);
+    //const ambientLight = new THREE.AmbientLight(0xffffff, 10);
+    //scene.add(ambientLight);
    //const pointLight =new THREE.PointLight(0x1234ff,100,200);
    // scene.add(pointLight);
     //const directionalLight = new THREE.DirectionalLight({color:0xfffff,distance:10,intensity:10});
@@ -72,6 +78,7 @@ export default function () {
   };
 
   const initialize = () => {
+    addLight();
     createEarth1();
     addEvent();
     resize();
