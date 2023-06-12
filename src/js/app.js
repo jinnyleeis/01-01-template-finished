@@ -32,10 +32,14 @@ export default function () {
 
   const createEarth1 = () => {
 
-   // const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-   // scene.add(ambientLight);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 10);
+    scene.add(ambientLight);
+   //const pointLight =new THREE.PointLight(0x1234ff,100,200);
+   // scene.add(pointLight);
+    //const directionalLight = new THREE.DirectionalLight({color:0xfffff,distance:10,intensity:10});
+   // scene.add(directionalLight);
     //지구에 적용할 푸른색상이 머테리얼을 만든다.
-    const material = new THREE.MeshStandardMaterial({map:textureLoader.load('assets/earth_nightmap.jpg')});
+    const material = new THREE.MeshStandardMaterial({emissive:1,emissiveIntensity:1,transparent:0.5, map:textureLoader.load('assets/earth_nightmap.jpg')});
     //이렇게 하면 자동으로 public 폴도 밑의 assets 폴더로 
     //지구처럼 둥근 sphere geometry 만든다. 
     const geometry = new THREE.SphereGeometry(1.3,30,30);
