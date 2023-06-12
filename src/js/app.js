@@ -47,14 +47,17 @@ export default function () {
     const light = new THREE.DirectionalLight(0xffffff,1);
     light.position.set(2.65,2.13,1.02);
     scene.add(light);
+    const pointLight =new THREE.PointLight(0xffffff,2,2);
+    pointLight.position.set(0,0,0);
+    scene.add(pointLight);
+
   }
 
   const createEarth1 = () => {
 
     //const ambientLight = new THREE.AmbientLight(0xffffff, 10);
     //scene.add(ambientLight);
-   //const pointLight =new THREE.PointLight(0x1234ff,100,200);
-   // scene.add(pointLight);
+   
     //const directionalLight = new THREE.DirectionalLight({color:0xfffff,distance:10,intensity:10});
    // scene.add(directionalLight);
     //지구에 적용할 푸른색상이 머테리얼을 만든다.
@@ -66,7 +69,7 @@ export default function () {
     });
     //이렇게 하면 자동으로 public 폴도 밑의 assets 폴더로 
     //지구처럼 둥근 sphere geometry 만든다. 
-    const geometry = new THREE.SphereGeometry(1.3,30,30);
+    const geometry = new THREE.SphereGeometry(1.4,30,30);
     const mesh = new THREE.Mesh(geometry,material);
     return mesh;
 
@@ -97,7 +100,7 @@ export default function () {
 
   const createParticles =() =>{
 
-    const count = 1000;
+    const count = 10000;
     const positions=new Float32Array(count*3);
     //각 정점의 x,y,z 좌표를 각각 하나의 아이템으로 만든 형태로 표현되기 때문에, 
     //정점의 개수인 count에 *3한 값을 넣어주도록 한다. 
@@ -118,7 +121,7 @@ export default function () {
     const texture = textureLoader.load('assets/particle.png'); 
     const particleMaterial=new THREE.PointsMaterial({
      depthWrite:false,alphaMap:texture,transparent:true,
-      color:0xffffff,size:3,sizeAttenuation:false
+      color:0xffffff,size:2,sizeAttenuation:false
     })
     const particleGeometry=new THREE.BufferGeometry();
     particleGeometry.setAttribute('position',new THREE.BufferAttribute(positions,3));
