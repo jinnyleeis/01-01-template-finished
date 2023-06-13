@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import Firework from '/src/js/Firework';
 
 export default function () {
   const renderer = new THREE.WebGLRenderer({
@@ -42,6 +43,14 @@ export default function () {
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.dampingFactor = 0.1;
+
+  const createFireWork = () =>{
+
+  const firework = new Firework({x:0,y:0});
+  //firework의 points란 변수를 참조할 수 있도록 만들었었다. 
+  //장면에 이를 추가한다. 
+  scene.add(firework.points);
+  }
 
   const addLight = () =>{
     const light = new THREE.DirectionalLight(0xffffff,1);
@@ -172,6 +181,7 @@ export default function () {
     create();
     //createPoints();
     createParticles();
+    createFireWork();
     addEvent();
     resize();
     draw();
