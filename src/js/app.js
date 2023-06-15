@@ -35,10 +35,10 @@ export default function () {
   const camera = new THREE.PerspectiveCamera(
     75,
     canvasSize.width / canvasSize.height,
-    0.1,
-    100
+    1,
+    10000
   );
-  camera.position.set(0, 0, 3);
+  camera.position.set(0, 0, 8000);
 
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
@@ -192,12 +192,13 @@ export default function () {
   const initialize = () => {
     addLight();
     create();
+    scene.add(firework.particlesystem);
     //createPoints();
    // createParticles();
    //  createFireWork();
     addEvent();
     resize();
-    scene.add(firework.particlesystem);
+    
     draw();
   };
 

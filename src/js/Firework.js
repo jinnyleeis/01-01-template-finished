@@ -8,8 +8,8 @@ class Firework
 
 constructor({x,y}){
     //각 파티클이 퍼지는 속도를 velocity란 변수를 이용 
-    const velocity=10+Math.random()*10;//10-20사이
-    const count=1000;
+    const count = 1000 + Math.round(Math.random() * 5000);
+    const velocity = 10 + Math.random() * 10;
     //버퍼지오메트리 + 포인츠 머테리얼을 써서 파티클을 생성해주면 될 것임 
 
     //이번에는 앞서 파티클을 생성했던 방법과 원리는 동일하지만, 
@@ -32,12 +32,13 @@ constructor({x,y}){
        
         //매 프레임마다 이동시킬 각 좌표의 변환형에 대한 정보를 넣어줄 것임 
 
-        //x/y/z 축 각 방향에 대해 이동할 변화량을 계산해주어야 한다.
-        particle.deltaX=THREE.MathUtils.randFloatSpread(velocity);
-        //만약 velocity가 10이라고 하면, 
-        //randfloatspread의 결괏값은 10의 절반으로 나눈 5 -> -5부터 5 사이의 값을 반환 
-        particle.deltaY=THREE.MathUtils.randFloatSpread(velocity);
-        particle.deltaZ=THREE.MathUtils.randFloatSpread(velocity);
+     
+        particle.theta = Math.random() * Math.PI * 2;
+        particle.phi = Math.random() * Math.PI * 2;
+  
+        particle.deltaX = velocity * Math.sin(particle.theta) * Math.cos(particle.phi);
+        particle.deltaY = velocity * Math.sin(particle.theta) * Math.sin(particle.phi);
+        particle.deltaZ = velocity * Math.cos(particle.theta);
        
         this.particles.push(particle);
 
@@ -60,7 +61,8 @@ constructor({x,y}){
             alphaMap:texture,
             transparent:true,
             depthWrite:false,
-            color : new THREE.Color(Math.random(),Math.random(),Math.random())
+            color : new THREE.Color(Math.random(),Math.random(),Math.random()),
+            blending: THREE.AdditiveBlending //채도도 좀 더 살아나게 만들어준다 
         });
 
         const particlesystem = new THREE.Points(particlesGeometry,particlesMaterial);
