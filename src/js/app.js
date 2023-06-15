@@ -44,13 +44,20 @@ export default function () {
   controls.enableDamping = true;
   controls.dampingFactor = 0.1;
 
-  const createFireWork = () =>{
+ // const firework = new Firework({x:0,y:0});
+  //firework의 points란 변수를 참조할 수 있도록 만들었었다. 
+  //장면에 이를 추가한다. 
+  //scene.add(firework.points);
+
+  //const createFireWork = () =>{
+
 
   const firework = new Firework({x:0,y:0});
   //firework의 points란 변수를 참조할 수 있도록 만들었었다. 
   //장면에 이를 추가한다. 
-  scene.add(firework.points);
-  }
+  
+  //해당 클래스의 points 객체를 씬에 추가한다. 
+  //}
 
   const addLight = () =>{
     const light = new THREE.DirectionalLight(0xffffff,1);
@@ -170,9 +177,15 @@ export default function () {
 
   const draw = () => {
     controls.update();
+   
+   
     renderer.render(scene, camera);
-    requestAnimationFrame(() => {
+    requestAnimationFrame(() => { 
       draw();
+      firework.update();
+      
+     
+     
     });
   };
 
@@ -180,10 +193,11 @@ export default function () {
     addLight();
     create();
     //createPoints();
-    createParticles();
-    createFireWork();
+   // createParticles();
+   //  createFireWork();
     addEvent();
     resize();
+    scene.add(firework.particlesystem);
     draw();
   };
 
