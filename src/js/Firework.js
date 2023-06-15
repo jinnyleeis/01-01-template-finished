@@ -56,7 +56,7 @@ constructor({x,y}){
 
         //이제 메터리얼을 추가한다. 
         const particlesMaterial = new THREE.PointsMaterial({
-            size:100, 
+            size:1, 
             alphaMap:texture,
             transparent:true,
             depthWrite:false,
@@ -83,7 +83,7 @@ constructor({x,y}){
         //우선, 모든 particles의 위치를 변화시켜줘야 하므로, 
         //particles 배열을 순회하는 반복문을 추가시켜준다. 
 
-        const position=this.particlesystem.geometry.attribute.position;
+        const position=this.particlesystem.geometry.attributes.position;
         //얘는 모든 파티클이 하나니까. 동일 위치에서 시작하니까. 
 
         //배열로 센다. 개수는 일단. 
