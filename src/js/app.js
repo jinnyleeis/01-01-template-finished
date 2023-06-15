@@ -62,7 +62,7 @@ export default function () {
 
 
   };
-  
+
   const firework = new Firework({x:0,y:0});
   //firework의 points란 변수를 참조할 수 있도록 만들었었다. 
   //장면에 이를 추가한다. 
@@ -203,12 +203,13 @@ export default function () {
 
   const draw = () => {
     controls.update();
+    fireworks.update();
    
    
     renderer.render(scene, camera);
     requestAnimationFrame(() => { 
       draw();
-    fireworks.update();
+   
       
      
      
@@ -218,8 +219,8 @@ export default function () {
   const initialize = () => {
     addLight();
     create();
-    scene.add(firework.particlesystem);
-    fireworks.push(firework);
+   // scene.add(firework.particlesystem);
+   // fireworks.push(firework);
    
     //createPoints();
    // createParticles();
