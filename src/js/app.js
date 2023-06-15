@@ -51,13 +51,28 @@ export default function () {
 
   //const createFireWork = () =>{
 
+  const fireworks=[];
 
+  fireworks.update = function (){
+    for (let i=0; i<this.length; i++)
+    {
+      const firework = fireworks[i];
+      firework.update();
+    }
+
+
+  };
+  
   const firework = new Firework({x:0,y:0});
   //firework의 points란 변수를 참조할 수 있도록 만들었었다. 
   //장면에 이를 추가한다. 
   
   //해당 클래스의 points 객체를 씬에 추가한다. 
   //}
+  scene.add(firework.particlesystem);
+  fireworks.push(firework);
+
+
 
   const addLight = () =>{
     const light = new THREE.DirectionalLight(0xffffff,1);
@@ -171,8 +186,19 @@ export default function () {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   };
 
+  const hanlemousedown = () =>{
+    const firework = new Firework({
+      x:THREE.MathUtils.randFloatSpread(8000),
+      y:THREE.MathUtils.randFloatSpread(8000)
+    });
+    scene.add(firework.particlesystem);
+    fireworks.push(firework);
+
+  }
+
   const addEvent = () => {
     window.addEventListener('resize', resize);
+    window.addEventListener('mousedown',hanlemousedown);
   };
 
   const draw = () => {
@@ -182,7 +208,7 @@ export default function () {
     renderer.render(scene, camera);
     requestAnimationFrame(() => { 
       draw();
-      firework.update();
+    fireworks.update();
       
      
      
@@ -193,6 +219,8 @@ export default function () {
     addLight();
     create();
     scene.add(firework.particlesystem);
+    fireworks.push(firework);
+   
     //createPoints();
    // createParticles();
    //  createFireWork();
